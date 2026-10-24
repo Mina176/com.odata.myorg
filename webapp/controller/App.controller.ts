@@ -1,11 +1,20 @@
-import BaseController from "./BaseController";
+import Controller from "sap/ui/core/mvc/Controller";
+import JSONModel from "sap/ui/model/json/JSONModel";
 
 /**
- * @namespace com.odata.myorg.controller
+ * @namespace ui5.tutorial.odatav4.controller
  */
-export default class App extends BaseController {
-	public onInit(): void {
-		// apply content density mode to root view
-		this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+export default class App extends Controller {
+
+	/**
+	 *  Hook for initializing the controller
+	 */
+	onInit(): void {
+		const jsonData = {
+			busy: false
+		};
+		const model = new JSONModel(jsonData);
+
+		this.getView().setModel(model, "appView");
 	}
 }

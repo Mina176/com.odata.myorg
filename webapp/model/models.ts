@@ -1,13 +1,10 @@
+// models.ts — central application models
 import JSONModel from "sap/ui/model/json/JSONModel";
-import BindingMode from "sap/ui/model/BindingMode";
-
 import Device from "sap/ui/Device";
 
+export function createDeviceModel(): JSONModel {
+	const model = new JSONModel(Device);
 
-export default {
-	createDeviceModel: () => {
-		const oModel = new JSONModel(Device);
-		oModel.setDefaultBindingMode(BindingMode.OneWay);
-		return oModel;
-	}
-};
+	model.setDefaultBindingMode("OneWay");
+	return model;
+}
