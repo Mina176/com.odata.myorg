@@ -13,11 +13,20 @@
               growing="true"
               growingThreshold="10"
               items="{
-                path: '/People'
+                path: '/People',
+                parameters: {
+                  $count: true
+                }
               }">
               <headerToolbar>
                 <OverflowToolbar>
                   <content>
+                    <SearchField
+                     id="searchField"
+                     width="20%"
+                     placeholder="{i18n>searchFieldPlaceholder}"
+                     search=".onSearch"
+                    />
                     <ToolbarSpacer />
                     <Button
                       id="refreshUsersButton"

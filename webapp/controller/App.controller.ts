@@ -7,6 +7,11 @@ import JSONModel from "sap/ui/model/json/JSONModel";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 import ResourceModel from "sap/ui/model/resource/ResourceModel";
 import Component from "../Component";
+import SearchField from "sap/m/SearchField";
+import Filter from "sap/ui/model/Filter";
+import FilterOperator from "sap/ui/model/FilterOperator";
+import ListBinding from "sap/ui/model/ListBinding";
+import FilterType from "sap/ui/model/FilterType";
 
 /**
  * @namespace ui5.tutorial.odatav4.controller
@@ -33,6 +38,18 @@ export default class App extends Controller {
 		}
 		binding.refresh();
 		MessageToast.show(this._getText("refreshSuccessMessage"));
+	}
+
+	onSearch() {
+		const view = this.getView();
+		const value = (view.byId("searchField") as SearchField).getValue();
+		const filter = new Filter({
+			path: "LastName",
+			operator: FilterOperator.Contains,
+			value1: value,
+		});
+
+		((view.byId("peopleList") as List).getBinding("items") as ODataListBinding).filter(filter, FilterType.Application);
 	}
 
 	/* =========================================================== */
